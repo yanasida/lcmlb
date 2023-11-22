@@ -1,0 +1,13 @@
+package com.nasida.core.metadata;
+
+import java.util.List;
+
+/**
+ * @author yanasida
+ * @date 2023/11/22 14:49
+ */
+public abstract class ByteMsgBodyMetadata {
+    protected List<FieldMetadata> fieldList;
+
+    protected Object realData;
+}
