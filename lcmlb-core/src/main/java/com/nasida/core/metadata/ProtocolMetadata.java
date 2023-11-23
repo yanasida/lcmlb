@@ -11,25 +11,25 @@ public abstract class ProtocolMetadata implements Protocol {
     /**
      * 协议编号
      */
-    protected String protocolCode;
+    private String protocolCode;
 
     /**
      * 协议版本
      */
-    protected String protocolVersion;
+    private String protocolVersion;
 
     /**
      * 序列化方式
      */
-    protected String serializationType;
+    private String serializationType;
 
     /**
      * 魔数
      */
-    protected String magic;
+    private String magic;
 
     /**
      * 协议头部长度
      */
-    protected Integer headLength;
+    private Integer headLength;
 }

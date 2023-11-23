@@ -6,8 +6,8 @@ import java.util.List;
  * @author yanasida
  * @date 2023/11/22 14:49
  */
-public abstract class ByteMsgBodyMetadata {
-    protected List<FieldMetadata> fieldList;
+public abstract class ByteMsgBodyMetadata<T> {
+    private List<FieldMetadata> fieldList;
 
-    protected Object realData;
+    private T realData;
 }

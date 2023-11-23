@@ -11,25 +11,25 @@ public abstract class FieldMetadata {
     /**
      * 字段名称,即变量名
      */
-    protected String fieldName;
+    private String fieldName;
 
     /**
      * 字段描述
      */
-    protected String description;
+    private String description;
 
     /**
      * 数据类型（Integer, Short, Long, Double, String）
      */
-    protected String dataType;
+    private String dataType;
 
     /**
      * 编码数据长度
      */
-    protected Integer encodeLength;
+    private Integer encodeLength;
 
     /**
      * 编码类型: BIN、BCD、HEX
      */
-    protected String encodeType;
+    private String encodeType;
 }

@@ -2,7 +2,6 @@ package com.nasida.core.manager;
 
 import com.nasida.core.connector.Connector;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * 键值链接管理器
  */
 
-public class LimitConnectorManager<K> extends TimeCheckedManager<K> implements ConnectorManager<K> {
+public class LimitConnectorManager<K> extends HeartCheckManager<K> implements ConnectorManager<K> {
 
     private static final int MAX_CAPACITY = 20;
 
@@ -37,7 +36,7 @@ public class LimitConnectorManager<K> extends TimeCheckedManager<K> implements C
         this.maxCapacity = maxCapacity;
     }
 
-    public LimitConnectorManager(int maxCapacity, @NotNull TimeUnit durationUnit, long checkDuration, long delay) {
+    public LimitConnectorManager(int maxCapacity, TimeUnit durationUnit, long checkDuration, long delay) {
         super(durationUnit, checkDuration, delay);
         if (maxCapacity < 1) throw new IllegalArgumentException();
         this.cache = new ConcurrentHashMap<>(maxCapacity);
@@ -45,7 +44,7 @@ public class LimitConnectorManager<K> extends TimeCheckedManager<K> implements C
     }
 
     @Override
-    public boolean put(@NotNull K key, @NotNull Connector connector) {
+    public boolean put(K key, Connector connector) {
         if (key == null || connector == null) throw new NullPointerException();
         if (maxCapacity <= cache.size()) {
             throw new IllegalStateException("The current capacity has reached the maximum quantity and no further additions can be made!");
@@ -55,13 +54,13 @@ public class LimitConnectorManager<K> extends TimeCheckedManager<K> implements C
     }
 
     @Override
-    public Connector remove(@NotNull K key) {
+    public Connector remove(K key) {
         if (key == null) throw new NullPointerException();
         return cache.remove(key);
     }
 
     @Override
-    public Connector get(@NotNull K key) {
+    public Connector get(K key) {
         if (key == null) throw new NullPointerException();
         return cache.get(key);
     }
@@ -75,7 +74,7 @@ public class LimitConnectorManager<K> extends TimeCheckedManager<K> implements C
     }
 
     @Override
-    public boolean contains(@NotNull K key) {
+    public boolean contains(K key) {
         if (key == null) throw new NullPointerException();
         return cache.containsKey(key);
     }

@@ -10,20 +10,20 @@ public abstract class ProtocolHeadMetadata {
     /**
      * 头部标识,魔数
      */
-    protected String headMagic;
+    private String headMagic;
 
     /**
      * 版本号
      */
-    protected String version;
+    private String version;
 
     /**
      * 业务命令类型
      */
-    protected short cmdType;
+    private short cmdType;
 
     /**
      * 数据长度
      */
-    protected short dataLength;
+    private short dataLength;
 }
