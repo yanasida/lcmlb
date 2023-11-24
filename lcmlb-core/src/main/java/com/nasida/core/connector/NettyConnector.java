@@ -15,8 +15,13 @@ public class NettyConnector extends HeartCheckConnector implements Connector {
     private boolean active;
 
     public NettyConnector(ChannelHandlerContext ctx) {
+        if (ctx == null) throw new NullPointerException();
         this.ctx = ctx;
         this.active = true;
+        setNodeIp(ctx.channel().remoteAddress().toString());
+        setExpiredTime(System.currentTimeMillis() + 30 * 1000);
+        setLastHbTime(System.currentTimeMillis());
+        setRegisterTime(System.currentTimeMillis());
     }
 
 
