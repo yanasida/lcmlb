@@ -1,6 +1,7 @@
 package com.nasida.core.manager;
 
 import com.nasida.core.connector.Connector;
+import com.nasida.core.connector.HeartCheckConnector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,15 @@ public class LimitConnectorManager<K> extends HeartCheckManager<K> implements Co
     }
 
     @Override
+    public Connector getActiveOne(K key) {
+        Connector connector = get(key);
+        if (connector.isActive()) {
+            return connector;
+        }
+        return null;
+    }
+
+    @Override
     public List<Connector> getAll() {
         if (cache.isEmpty()) {
             return null;
@@ -90,9 +100,17 @@ public class LimitConnectorManager<K> extends HeartCheckManager<K> implements Co
 
     @Override
     void check() {
+        System.out.println("heart beat check!");
+        System.out.println(cache.values());
         cache.entrySet().removeIf(entry -> {
             Connector connector = entry.getValue();
-            return !connector.isActive();
+            boolean active = connector.isActive();
+            if (!active) {
+                connector.close();
+                System.out.println("关闭连接："+entry.getKey());
+                return true;
+            }
+            return false;
         });
     }
 }

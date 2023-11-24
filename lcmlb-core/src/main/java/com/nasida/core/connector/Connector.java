@@ -17,9 +17,8 @@ public interface Connector {
     /**
      * 关闭连接
      *
-     * @throws Exception 关闭连接失败时抛出异常
      */
-    boolean close() throws Exception;
+    boolean close();
 
     /**
      * 是否可用

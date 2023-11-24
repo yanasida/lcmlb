@@ -33,14 +33,15 @@ public class NettyConnector extends HeartCheckConnector implements Connector {
     }
 
     @Override
-    public boolean close() throws Exception {
+    public boolean close() {
         this.active = false;
+        ctx.close();
         return true;
     }
 
     @Override
     public boolean isActive() {
-        return active && isExpired() && ctx.channel().isActive();
+        return active && !isExpired() && ctx.channel().isActive();
     }
 
     @Override

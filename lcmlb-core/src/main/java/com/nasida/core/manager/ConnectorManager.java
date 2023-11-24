@@ -18,6 +18,8 @@ public interface ConnectorManager<K> {
 
     Connector get(K key);
 
+    Connector getActiveOne(K key);
+
     List<Connector> getAll();
 
     boolean contains(K key);
